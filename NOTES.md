@@ -453,7 +453,7 @@ Then update the `resources/views/chirps/index.blade.php`:
                                         <form method="POST" action="{{ route('chirps.destroy', $chirp) }}">
                                             @csrf
                                             @method('delete')
-                                            <x-dropdown-link :href="route('chirps.destroy', $chirp)" onclick="if(confirm('Are you sure?')) { event.preventDefault(); this.closest('form').submit(); }">
+                                            <x-dropdown-link :href="route('chirps.destroy', $chirp)" onclick=" event.preventDefault(); if(confirm('Are you sure?')) { this.closest('form').submit(); }">
                                                 {{ __('Delete') }}
                                             </x-dropdown-link>
                                         </form>
