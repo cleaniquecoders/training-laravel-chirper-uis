@@ -13,7 +13,7 @@ class ChirpController extends Controller
     public function index()
     {
         // 1. query from database all the chirps record
-        $chirps = Chirp::paginate(); // select * from chirps limi 0, 10
+        $chirps = Chirp::latest()->paginate(); // select * from chirps limi 0, 10
 
         // 2. pass data to view for rendering
         // 3. then return respnose from rendered view
@@ -36,7 +36,29 @@ class ChirpController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validate our form input
+        $validated = $request->validate([
+            'message' => 'required|string|max:250',
+            'message' => [
+                'required',
+                'string',
+                'max:250'
+            ],
+        ]);
+
+        // store in database through relationship
+        $request->user()->chirps()->create($validated);
+
+        // store in database without relationship
+        // Chirp::create([
+        //     'user_id' => auth()->user()->id,
+        //     'message' => $request->message,
+        // ]);
+
+        // flash message
+
+        // redirect
+        return redirect(route('chirps.index'));
     }
 
     /**
