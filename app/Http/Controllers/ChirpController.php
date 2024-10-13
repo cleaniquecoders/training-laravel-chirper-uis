@@ -12,7 +12,15 @@ class ChirpController extends Controller
      */
     public function index()
     {
-        //
+        // 1. query from database all the chirps record
+        $chirps = Chirp::get(); // select * from chirps
+
+        // 2. pass data to view for rendering
+        // 3. then return respnose from rendered view
+        return view('chirps.index', compact('chirps'));
+
+        // return view('chirps.index', ['tweets' => $chirps]);
+        // return view('chirps.index')->with('tweets', $chirps);
     }
 
     /**
