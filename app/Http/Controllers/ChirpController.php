@@ -13,7 +13,7 @@ class ChirpController extends Controller
     public function index()
     {
         // 1. query from database all the chirps record
-        $chirps = Chirp::get(); // select * from chirps
+        $chirps = Chirp::paginate(); // select * from chirps limi 0, 10
 
         // 2. pass data to view for rendering
         // 3. then return respnose from rendered view

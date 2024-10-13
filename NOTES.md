@@ -234,3 +234,32 @@ Then update the `resources/views/chirps/index.blade.php`:
 ```
 
 Now you can register & login the app, and go to URL: `<your-domain>/chirps`.
+
+> Add Navigation menu as in https://bootcamp.laravel.com/blade/creating-chirps#navigation-menu.
+
+## Setup: Using Pagination
+
+Update the query in ChirpController:
+
+```php
+$chirps = Chirp::get();
+```
+
+To use paginate:
+
+```php
+$chirps = Chirp::paginate();
+```
+
+Then in `resources/views/chirps/index.blade.php`, add the following at the top & bottom of list.
+
+```php
+{{ $chirps->links() }}
+<div class="p-6">
+    {{ $chirps->links() }}
+    @foreach ($chirps as $chirp)
+        <li>{{ $chirp->message }}</li>
+    @endforeach
+    {{ $chirps->links() }}
+</div>
+```
